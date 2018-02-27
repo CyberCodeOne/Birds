@@ -10,30 +10,35 @@ public class Dish
 		this.worms = worms;
 		copy = worms;
 	}
-	public synchronized void waitForEmptyToFill() {
-        while (worms > 0) {
-            try {
+	public synchronized void waitForEmptyToFill() 
+	{
+        while (worms > 0) 
+        {
+            try 
+            {
                 notifyAll();
                 wait();
-            } catch (Exception ie) {
-                System.out.println (ie.getMessage());
-            }
+            } 
+            catch (Exception ie) {System.out.println (ie.getMessage());}
         }
         worms = copy;
         System.out.println ("Parent filled the dish");
         notifyAll();
     }
 
-    public synchronized void waitForFullToEat () {
-        while (worms <= 0 && !isTerminated()) {
-            try {
+    public synchronized void waitForFullToEat () 
+    {
+        while (worms <= 0 && !isTerminated()) 
+        {
+            try 
+            {
                 notifyAll();
                 wait();
-            } catch (Exception ie) {
-                System.out.println (ie.getMessage());
-            }
+            } 
+            catch (Exception ie) {System.out.println (ie.getMessage());}
         }
-        if (worms > 0) {
+        if (worms > 0) 
+        {
             worms--;
             System.out.println("Bird " + Thread.currentThread().getName() + " has eaten."
                     + " The number of worms left is " + worms);
@@ -45,19 +50,23 @@ public class Dish
     }
 
 
-    public synchronized boolean isShutDown() {
+    public synchronized boolean isShutDown() 
+    {
         return shutDown;
     }
 
-    public synchronized void setShutDown(boolean shutDown) {
+    public synchronized void setShutDown(boolean shutDown) 
+    {
         this.shutDown = shutDown;
     }
 
-    public synchronized boolean isTerminated() {
+    public synchronized boolean isTerminated() 
+    {
         return isTerminated;
     }
 
-    public synchronized void setTerminated(boolean terminated) {
+    public synchronized void setTerminated(boolean terminated) 
+    {
         isTerminated = terminated;
     }
 }
