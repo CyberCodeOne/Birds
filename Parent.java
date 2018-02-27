@@ -12,13 +12,8 @@ public class Parent extends Thread
 	{
 		for (int i = 0; i < 3; i++)
 		{
-			dish.waitForEmpty();
-			dish.fill();
+			dish.waitForEmptyToFill();
 		}
-		done = 1;
-	}
-	public static synchronized int getDone()
-	{
-		return done;
+		dish.setShutDown(true);
 	}
 }
